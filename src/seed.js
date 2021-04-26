@@ -1,39 +1,39 @@
 export function seedDatabase(firebase) {
     const users = [
       {
-        userId: 'B4ijp3jZWfW31KgTiOafuLF5G8Q2',
-        username: 'karl',
-        fullName: 'Karl Hadwen',
-        emailAddress: 'karlhadwen@gmail.com',
+        userId: 'awIW8IpjhtQ2Awe06Xq5YSQqFGE3',
+        username: 'yuri',
+        fullName: 'Yuri Dev',
+        emailAddress: 'horrorkid1408@gmx.at',
         following: ['2'],
         followers: ['2', '3', '4'],
         dateCreated: Date.now()
       },
       {
         userId: '2',
-        username: 'raphael',
-        fullName: 'Raffaello Sanzio da Urbino',
-        emailAddress: 'raphael@sanzio.com',
+        username: 'miyazaki',
+        fullName: 'Hayao Miyazaki',
+        emailAddress: 'hayaomiyazaki@ghibli.com',
         following: [],
-        followers: ['B4ijp3jZWfW31KgTiOafuLF5G8Q2'],
+        followers: ['awIW8IpjhtQ2Awe06Xq5YSQqFGE3'],
         dateCreated: Date.now()
       },
       {
         userId: '3',
-        username: 'dali',
-        fullName: 'Salvador Dalí',
-        emailAddress: 'salvador@dali.com',
+        username: 'hisaishi',
+        fullName: 'Joe Hisaishi',
+        emailAddress: 'hisaishi@music.com',
         following: [],
-        followers: ['B4ijp3jZWfW31KgTiOafuLF5G8Q2'],
+        followers: ['awIW8IpjhtQ2Awe06Xq5YSQqFGE3'],
         dateCreated: Date.now()
       },
       {
         userId: '4',
-        username: 'orwell',
-        fullName: 'George Orwell',
-        emailAddress: 'george@orwell.com',
+        username: 'kitano',
+        fullName: 'Takeshi Kitano',
+        emailAddress: 'takeshi@kitano.com',
         following: [],
-        followers: ['B4ijp3jZWfW31KgTiOafuLF5G8Q2'],
+        followers: ['awIW8IpjhtQ2Awe06Xq5YSQqFGE3'],
         dateCreated: Date.now()
       }
     ];
