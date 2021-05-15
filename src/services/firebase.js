@@ -33,3 +33,40 @@ export async function getSuggestedProfiles(userId, following) {
     .filter((profile) => profile.userId !== userId && !following.includes(profile.userId));
 }
 
+export async function updateLoggedInUserFollowing(loggedInUserDocId, profileId, isFollowingProfile) {
+    return firebase
+    .firestore()
+    .collection('users')
+    .doc(loggedInUserDocId)
+    .update({
+        following: isFollowingProfile
+        ? FieldValue.arrayRemove(profileId)
+        : FieldValue.arrayUnion(profileId)
+    });
+}
+
+export async function updateFollowedUserFollowers(profileDocId, loggedInUserDocId, isFollowingProfile) {
+    return firebase
+    .firestore()
+    .collection('users')
+    .doc(profileDocId)
+    .update({
+        followers: isFollowingProfile
+        ? FieldValue.arrayRemove(loggedInUserDocId)
+        : FieldValue.arrayUnion(loggedInUserDocId)
+    });
+}
+
+export async function getPhotos(userId, following) {
+    const result = await firebase
+    .firestore()
+    .collection('photos')
+    .where('userId', 'in', following)
+    .get();
+
+    const usesrFollowedPhotos = result.doc.map((photos) => ({
+        ...photos.data(),
+        docId: photos.id
+    }));
+
+}
