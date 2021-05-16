@@ -12,7 +12,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
         <div className="p-4 pt-1 pb-4">
             {comments.length >= 3 && (
                 <p className="text-sm text-gray-base mb-l cursor-pointer">
-                    View all {comments.length} comments
+                    View all comments
                 </p>
             )}
             {comments.slice(0, 3).map((item) => (
