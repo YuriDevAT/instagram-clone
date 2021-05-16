@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import { getUserByUsername, getUserPhotosByUsername } from '../../services/firebase';
 
-export default function UserProfile({ username }) {
+export default function Profile({ user }) {
     const reducer = (state, newState) => ({ ...state, ...newState });
     const initialState = {
     profile: {},
@@ -11,7 +11,7 @@ export default function UserProfile({ username }) {
     followerCount: 0
 };
 
-    const [{ profile, photosCollection, followerCount }, dispatch] = userReducer(reducer, initialState);
+    const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
         async function getProfileInfoAndPhotos() {
@@ -30,7 +30,7 @@ export default function UserProfile({ username }) {
     )
 }
 
-UserProfile.propTypes = {
+Profile.propTypes = {
     user: PropTypes.shape({
         dateCreated: PropTypes.number.isRequired,
         emailAdress: PropTypes.string.isRequired,
