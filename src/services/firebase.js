@@ -110,3 +110,23 @@ export async function getUserPhotosByUserId(username) {
         docId: item.id
     }));
 }
+
+export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
+    const result = await firebase
+    .firestore()
+    .collection('user')
+    .where('username', '==', loggedInUserUsername)
+    .where('following', 'array-contains', profileUserId)
+    .get();
+
+    const [response = {}] = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }));
+    return response.userId;
+}
+
+export async function toggleFollow(isFollowingProfile, activeUserDocId, profileDocId, profileUserId, followingUserId) {
+    await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+    await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
+}

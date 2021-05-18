@@ -26,10 +26,11 @@ export default function Profile({ user }) {
         <>
         <Header 
         photosCound={photosCollection ? photosCollection.length : 0 }
-        username={username}
+        profile={profile}
+        followerCount={followerCount}
+        setFollowerCount={dispatch}
         />
         <Photos photos={photosCollection} />
-        <p>Hello {user.username}</p>
         </>
     )
 }
