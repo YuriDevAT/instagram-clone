@@ -8,7 +8,7 @@ export default function Profile({ user }) {
     const reducer = (state, newState) => ({ ...state, ...newState });
     const initialState = {
     profile: {},
-    photosCollection: [],
+    photosCollection: null,
     followerCount: 0
 };
 
@@ -16,7 +16,7 @@ export default function Profile({ user }) {
 
     useEffect(() => {
         async function getProfileInfoAndPhotos() {
-            const photos = getUserPhotosByUserId(user.username);
+            const photos = await getUserPhotosByUserId(user.userId);
             dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length })
         }
         getProfileInfoAndPhotos();
@@ -25,7 +25,7 @@ export default function Profile({ user }) {
     return (
         <>
         <Header 
-        photosCound={photosCollection ? photosCollection.length : 0 }
+        photosCount={photosCollection ? photosCollection.length : 0 }
         profile={profile}
         followerCount={followerCount}
         setFollowerCount={dispatch}
@@ -37,12 +37,12 @@ export default function Profile({ user }) {
 
 Profile.propTypes = {
     user: PropTypes.shape({
-        dateCreated: PropTypes.number.isRequired,
-        emailAdress: PropTypes.string.isRequired,
-        followers: PropTypes.array.isRequired,
-        following: PropTypes.array.isRequired,
-        fullname: PropTypes.string.isRequired,
-        userId: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired  
-    }).isRequired
+        dateCreated: PropTypes.number,
+        emailAdress: PropTypes.string,
+        followers: PropTypes.array,
+        following: PropTypes.array,
+        fullname: PropTypes.string,
+        userId: PropTypes.string,
+        username: PropTypes.string  
+    })
 };
