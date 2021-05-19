@@ -16,11 +16,11 @@ export default function SignUp() {
     const [error, setError] = useState('');
     const isInvalid = password === '' || emailAdress === '';
 
-    const handleSingUp = async (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
 
         const usernameExists = await doesUsernameExist(username);
-        if (!usernameExists.length) {
+        if (!usernameExists) {
             try {
                 const createdUserResult = await firebase
                 .auth()
@@ -33,7 +33,8 @@ export default function SignUp() {
                     username: username.toLowerCase(),
                     fullName,
                     emailAdress: emailAdress.toLowerCase(),
-                    following: [],
+                    following: ['2'],
+                    followers: [],
                     dateCreated: Date.now()
                 });
                 history.push(ROUTES.DASHBOARD);
@@ -44,6 +45,7 @@ export default function SignUp() {
                 setError(error.message);
             }
         } else {
+            setUsername('');
             setError('That username is already taken, please try another!');
         }
     };
@@ -66,7 +68,7 @@ export default function SignUp() {
                     <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
                 </h1>
                 {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
-                <form onSubmit={handleSingUp} method="POST">
+                <form onSubmit={handleSignUp} method="POST">
                     <input
                     aria-label="Enter your username"
                     type="text"

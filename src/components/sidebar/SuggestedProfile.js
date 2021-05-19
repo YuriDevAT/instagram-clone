@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { updateLoggedInUserFollowing, updateFollowedUserFollowers } from '../../services/firebase';
+import { updateLoggedInUserFollowing, updateFollowedUserFollowers, getUserByUserId } from '../../services/firebase';
+import LoggedInUserContext from '../../context/logged-in-user';
 
 export default function SuggestedProfile({ profileDocId, username, profileId, userId, loggedInUserDocId }) {
     const [followed, setFollowed] = useState(false);
+    const { setActiveUser } = useContext(LoggedInUserContext);
 
     async function handleFollowUser() {
         setFollowed(true);
-
         await updateLoggedInUserFollowing(loggedInUserDocId, profileId, false);
-
         await updateFollowedUserFollowers(profileDocId, userId, false);
+        const [user] = await getUserByUserId(userId);
+        setActiveUser(user);
 
     }
     
@@ -22,6 +24,9 @@ export default function SuggestedProfile({ profileDocId, username, profileId, us
                 className="rounded-full w-8 flex mr-3"
                 src={`/images/avatars/${username}.png`}
                 alt=""
+                onError={(e) => {
+                    e.target.src = `/images/avatars/default.png`;
+                }}
                 />
                 <Link to={`/p/${username}`}>
                     <p className="font-bold text-sm">{username}</p>
