@@ -30,7 +30,9 @@ export default function AddComment({ docId, comments, setComments, commentInput 
             <form
             className="flex justify-between pl-0 pr-5"
             method="POST"
-            onSubmit={(event) => comment.length >= 1 ? handleSubmitComment : event.preventDefault()}>
+            onSubmit={(event) =>
+                comment.length >= 1 ? handleSubmitComment(event) : event.preventDefault()}
+                >
                 <input
                 aria-label="Add a comment"
                 autoComplete="off"
