@@ -42,7 +42,6 @@ export default function Header() {
                       />
                     </svg>
                   </Link>
-  
                   <button
                     type="button"
                     title="Sign Out"
@@ -77,7 +76,7 @@ export default function Header() {
                       <Link to={`/p/${user?.username}`}>
                         <img
                           className="rounded-full h-8 w-8 flex"
-                          src={`/images/avatars/${user?.username}.jpg`}
+                          src={`/images/avatars/${user?.username}.png`}
                           alt={`${user?.username} profile`}
                           onError={(e) => {
                             e.target.src = DEFAULT_IMAGE_PATH;
